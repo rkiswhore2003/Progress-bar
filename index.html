@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar</title>
+
+
+
+    <style>
+        
+        *{
+            font-family: system-ui;
+        }
+        .container {
+            text-align: center;
+            background-color: yellow;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 10%;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            width: 80%;
+            margin: auto;
+        }
+
+        .step {
+            position: relative;
+            width: 20%;
+            text-align: center;
+        }
+
+        .bullet {
+            width: 30px;
+            height: 30px;
+            border: 2px solid gray;
+            border-radius: 50%;
+            display: inline-block;
+            line-height: 26px;
+            font-size: 18px;
+        }
+
+        .bullet.completed {
+            background-color: green;
+        }
+
+        .step.completed .text {
+            color: red;
+            font-weight: bold;
+        }
+
+        .text {
+            margin-top: 5px;
+            color: gray;
+            font-weight: bold;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            width: 50px;
+            height: 30px;
+            margin: 0 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #prevBtn {
+            background-color: lightgray;
+            box-shadow: black 0px 2px 4px;
+        }
+
+        #nextBtn {
+            background-color: purple;
+            color: white;
+            box-shadow: black 0px 2px 4px;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="progress-bar">
+            <div class="step completed">
+                <div class="bullet completed">✔</div>
+                <div class="text">Start</div>
+            </div>
+            <div class="step">
+                <div class="bullet">X</div>
+                <div class="text">Step 2</div>
+            </div>
+            <div class="step">
+                <div class="bullet">X</div>
+                <div class="text">Step 3</div>
+            </div>
+            <div class="step">
+                <div class="bullet">X</div>
+                <div class="text">Step 4</div>
+            </div>
+            <div class="step">
+                <div class="bullet">X</div>
+                <div class="text">Finish</div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="prevBtn">←</button>
+            <button id="nextBtn">→</button>
+        </div>
+    </div>
+
+
+
+    <script>
+        const steps = document.querySelectorAll('.step');
+        const comp = document.querySelectorAll('.bullet');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        let currentStep = 0;
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                steps[currentStep].classList.remove('completed');
+                currentStep++;
+                steps[currentStep].classList.add('completed');
+                document.getElementsByClassName("bullet")[currentStep].textContent="✔";
+                document.getElementsByClassName("bullet")[currentStep].style.backgroundColor="green";
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 0) {
+                steps[currentStep].classList.remove('completed');
+                document.getElementsByClassName("bullet")[currentStep].textContent="X";
+                document.getElementsByClassName("bullet")[currentStep].style.backgroundColor="transparent";
+                currentStep--;
+                steps[currentStep].classList.add('completed');
+            }
+        });
+    </script>
+
+
+
+</body>
+
+</html>
